@@ -13,7 +13,10 @@ module.exports = function check(str, bracketsConfig) {
     });
 
     str.split('').forEach(element => {
-        if (bracketsOpening.includes(element)) {
+        // check if element is an opening bracket, and in case
+        // opening and closing brackets are the same then check if it is
+        // already in the stack, then it is a closing bracket
+        if (bracketsOpening.includes(element) && !bracketsStack.includes(element)) {
             bracketsStack.push(element);
         } else if (bracketsClosing.includes(element)){
             // check if current closing bracket matches last opening bracket
