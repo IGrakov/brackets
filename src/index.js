@@ -12,25 +12,23 @@ module.exports = function check(str, bracketsConfig) {
         bracketsClosing.push(element[1]);
     });
 
-    str.split('').forEach(element => {
-        // check if element is an opening bracket, and in case
-        // opening and closing brackets are the same then check if it is
-        // already in the stack, then it is a closing bracket
-        if (bracketsOpening.includes(element) && !bracketsStack.includes(element)) {
-            bracketsStack.push(element);
-        } else if (bracketsClosing.includes(element)){
+    for (let i = 0; i < str.length; i++) {
+        // if next is a closing bracket and there is nothing to match return false
+        if ((bracketsClosing.includes(str[i])) && (bracketsStack.length === 0)){
+            return false;
+        } else if (bracketsOpening.includes(str[i]) && !bracketsStack.includes(str[i])) {
+            bracketsStack.push(str[i]);
+        } else if ((bracketsClosing.includes(str[i])) && (bracketsStack.length !== 0)){
             // check if current closing bracket matches last opening bracket
             // comparing opening bracket with respective index with opening bracket in the stack 
             // then deleting the opening bracket from the stack
-            if (bracketsStack.length !== 0 && 
-                bracketsStack[bracketsStack.length - 1] === bracketsOpening[bracketsClosing.indexOf(element)]) {
+            if ((bracketsStack.length !== 0) && (bracketsStack[bracketsStack.length - 1] === bracketsOpening[bracketsClosing.indexOf(str[i])])) {
                 bracketsStack.pop();
-            } /*else {
+            } else {
                 return false;
-            }*/
+            }
         }
-    });
+    }
 
     return bracketsStack.length === 0 ? true : false;
-
 }
