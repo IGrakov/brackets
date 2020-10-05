@@ -25,9 +25,9 @@ module.exports = function check(str, bracketsConfig) {
             if (bracketsStack.length !== 0 && 
                 bracketsStack[bracketsStack.length - 1] === bracketsOpening[bracketsClosing.indexOf(element)]) {
                 bracketsStack.pop();
-            } else {
+            } /*else {
                 return false;
-            }
+            }*/
         }
     });
 
