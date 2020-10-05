@@ -1,6 +1,6 @@
 module.exports = function check(str, bracketsConfig) {
 
-    if (str.length === 0 || bracketsConfig == 0) {
+    if (str.length === 0 || bracketsConfig === 0) {
         return true;
     }
 
@@ -20,7 +20,7 @@ module.exports = function check(str, bracketsConfig) {
             // comparing opening bracket with respective index with opening bracket in the stack 
             // then deleting the opening bracket from the stack
             if (bracketsStack.length !== 0 && 
-                bracketsOpening[bracketsOpening.length - 1] === bracketsOpening[bracketsClosing.indexOf(element)]) {
+                bracketsStack[bracketsStack.length - 1] === bracketsOpening[bracketsClosing.indexOf(element)]) {
                 bracketsStack.pop();
             } else {
                 return false;
